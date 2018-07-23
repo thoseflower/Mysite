@@ -9,7 +9,7 @@ https://docs.djangoproject.com/zh-hans/2.0/
 
 	
 改变模型需要这三步：
-	1. 编辑 models.py 文件，改变模型。
-	2. 运行 python manage.py makemigrations 为模型的改变生成迁移文件。
-	3. 运行 python manage.py migrate 来应用数据库迁移。
+  1. 编辑 models.py 文件，改变模型。
+  2. 运行 python manage.py makemigrations 为模型的改变生成迁移文件。
+  3. 运行 python manage.py migrate 来应用数据库迁移。
 数据库迁移被分解成生成和应用两个命令是为了让你能够在代码控制系统上提交迁移数据并使其能在多个应用里使用；这不仅仅会让开发更加简单，也给别的开发者和生产环境中的使用带来方便。

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Detail</title>
+</head>
+<body>
+    <!--<h1>{{ question.question_text }}</h1>-->
+    <!--<ul>-->
+    <!--{% for choice in question.choice_set.all %}-->
+        <!--<li>{{ choice.choice_text }}</li>-->
+    <!--{% endfor %}-->
+    <!--</ul>-->
+
+    <!--增加表单功能-->
+    <h1>{{ question.question_text }}</h1>
+
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+    <form action="{% url 'polls:vote' question.id %}" method="post">
+    <!--小心跨站点请求伪造，所有针对内部 URL 的 POST 表单都应该使用 {% csrf_token %} 模板标签-->
+    {% csrf_token %}
+    <!--每个 Choice 前添加一个单选按钮。 每个单选按钮的 value 属性是对应的各个 Choice 的 ID。每个单选按钮的 name 是 "choice"-->
+    {% for choice in question.choice_set.all %}
+        <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
+        <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br />
+    {% endfor %}
+    <input type="submit" value="Vote" />
+    </form>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS</title>
+</head>
+<body>
+    <h2>点击按钮检测年龄</h2>
+    年龄：<input id="age" value="18">
+    <button onclick="check_age()">Check</button>
+    <br><br>
+    <p>是否达到限定年龄：</p>
+    <p id="voteable" style="color:#ff0000;"></p>
+
+    <h2>计算乘法</h2>
+    数值1:<input id="a" value="1"><br>
+    数值2:<input id="b" value="1">
+    <button onclick="multipy()">Multipy</button>
+    <br><br>
+    <p>Result:</p>
+    <p id="result" style="color:#ff0000;"></p>
+
+    <br><br>
+    <a href="{% url 'polls:index' %}">Return to Home</a>
+    <script>
+        function check_age()
+        {
+            var age, voteable;
+            age = document.getElementById('age').value;
+            voteable = (age < 18) ? "年龄太小":"年龄已达到";
+            document.getElementById('voteable').innerHTML = voteable;
+        }
+
+        function multipy()
+        {
+            var a = document.getElementById('a').value;
+            var b = document.getElementById('b').value;
+            var result = a * b
+            document.getElementById('result').innerHTML = result;
+        }
+    </script>
+</body>
+</html>

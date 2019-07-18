@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lonin</title>
+</head>
+<body>
+    <h1>Login</h1>
+    <form action="{% url 'polls:login'%}" method="post">
+        {% csrf_token %}
+        <p>Username:<input type="text" name="name"></p>
+        <p>Password:<input type="password" name="pwd"></p>
+        <p><input type="submit" name="login" value="Sign up"></p>
+        <p><input type="submit" name="delete" value="Delete"></p>
+    </form>
+    <br>
+    {% if name %}
+        <h3>Sign up success for:</h3>
+        <p>Username:{{ name }}</p>
+        <p>Password: {{ passwd }}</p>
+    {% endif %}
+    {% if delete %}
+        <h3>{{ delete }}</h3>
+    {% endif %}
+    <br>
+    <a href="{% url 'polls:index' %}">Return to Home</a>
+</body>
+</html>

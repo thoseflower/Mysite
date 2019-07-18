@@ -5,7 +5,7 @@ from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
 
-from .models import Question, Choice
+from .models import Question, Choice, User
 
 # Create your views here.
 
@@ -147,3 +147,24 @@ def vote(request, question_id):
         # HttpResponseRedirect 只接收一个参数：用户将要被重定向的 URL
         # 使用reverse() 函数避免了在视图函数中硬编码 URL
         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
+
+def login(request):
+    # return HttpResponse("Please Login")
+    user_info = {}
+    if request.method == 'POST':
+        if 'login' in request.POST:
+            user_info['name'] = request.POST['name']
+            user_info['passwd'] = request.POST['pwd']
+            user = User()
+            user.name = user_info['name']
+            user.passwd = user_info['passwd']
+            user.save()
+        elif 'delete' in request.POST:
+            name = request.POST['name']
+            user_selected = User.objects.filter(name=name)
+            user_selected.delete()
+            return render(request, 'polls/login.html', {'delete': "Delete %s OK" % name})
+    return render(request, 'polls/login.html', user_info)
+
+def js(request):
+    return render(request, 'polls/js.html')
